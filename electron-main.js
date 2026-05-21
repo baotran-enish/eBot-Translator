@@ -11,7 +11,7 @@ function createWindow() {
       contextIsolation: false,
     },
     icon: path.join(__dirname, 'public/favicon.ico'), // Ensure icon exists or remove
-    title: 'KOE Translator'
+    title: 'eBot'
   });
 
   if (isDev) {
