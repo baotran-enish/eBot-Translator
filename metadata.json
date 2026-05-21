@@ -1,0 +1,12 @@
+{
+  "name": "eBot Trainslator",
+  "description": "A high-performance Japanese-Vietnamese translation tool with offline history and voice capabilities.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "Translation",
+    "Speech to Text",
+    "Text to Speech"
+  ]
+}
