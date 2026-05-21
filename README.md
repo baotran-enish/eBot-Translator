@@ -1,83 +1,57 @@
-# Localization AI Hub - Local Setup Guide
+# eBot - Công cụ Dịch thuật & Tra cứu Game Anime (Nhật - Việt)
 
-Dự án này là một công cụ hỗ trợ dịch thuật và tra cứu ngôn ngữ chuyên dụng cho các dự án Game Nhật Bản (Anime Game).
-
-## 1. Cách chạy ứng dụng trên máy tính cá nhân (Local)
-
-Để chạy ứng dụng này trên máy tính của bạn, hãy làm theo các bước sau:
-
-### Yêu cầu hệ thống:
-- **Node.js**: Phiên bản 18 trở lên (Tải tại [nodejs.org](https://nodejs.org/)).
-
-### Các bước cài đặt:
-1. **Xuất mã nguồn**: Sử dụng menu "Settings" -> "Export to ZIP" (hoặc GitHub) trong AI Studio để tải toàn bộ mã nguồn về máy.
-2. **Giải nén**: Giải nén file ZIP vào một thư mục trên máy tính.
-3. **Mở Terminal**: Mở Command Prompt hoặc PowerShell (Windows) / Terminal (Mac/Linux) tại thư mục đó.
-4. **Cài đặt thư viện (QUAN TRỌNG)**:
-   ```bash
-   npm install
-   ```
-   *Lưu ý: Nếu bị lỗi thiếu thư viện khi chạy (ví dụ: `pdf-lib`), hãy thử chạy `npm install pdf-lib` để cài đặt thủ công.*
-
-5. **Cấu hình API Key**:
-   - Tạo một file mới tên là `.env` trong thư mục gốc.
-   - Nội dung file `.env`:
-     ```env
-     GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
-     ```
-   - Lấy API Key tại [Google AI Studio](https://aistudio.google.com/app/apikey).
-
-6. **Chạy ứng dụng**:
-   ```bash
-   npm run dev
-   ```
-7. **Truy cập**: Mở trình duyệt và vào địa chỉ `http://localhost:3000`.
-
-> **Lưu ý về lỗi URL**: Nếu terminal hiện `Server running on http://0.0.0.0:3000`, bạn hãy truy cập vào `http://localhost:3000` trên trình duyệt. `0.0.0.0` là địa chỉ nội bộ của server giúp nó có thể truy cập được từ bên ngoài, còn trên máy cá nhân bạn dùng `localhost`.
-
-> **Khắc phục lỗi "Failed to resolve import"**: 
-> Nếu bạn thấy lỗi liên quan đến `pdf-lib` hoặc các thư viện khác:
-> 1. Xóa thư mục `node_modules`.
-> 2. Chạy lại `npm install`.
-> 3. Nếu vẫn lỗi, chạy `npm install pdf-lib xlsx jszip mammoth motion react-markdown`.
+Công cụ hỗ trợ dịch thuật, biên dịch tài liệu và tra cứu từ vựng tối ưu cho các dự án Game Nhật Bản (Anime Game).
 
 ---
 
-## 2. Cách đóng gói thành file cài đặt (.exe)
+## 1. Cách chạy ứng dụng trên máy tính (Chạy Local)
 
-Tôi đã cấu hình sẵn dự án để bạn có thể đóng gói thành file `.exe` bằng **Electron**.
+**Yêu cầu:** Đã cài đặt [Node.js](https://nodejs.org/) (Phiên bản 18+).
 
-### Các bước thực hiện:
-1. **Cài đặt công cụ hỗ trợ**:
+### Bước 1: Tải mã nguồn & Cài đặt
+1. **Tải mã nguồn:** Chọn **Settings (Cài đặt)** &rarr; **Export to ZIP** trong Google AI Studio.
+2. **Giải nén:** Giải nén file ZIP vào một thư mục trên máy tính của bạn.
+3. **Cài đặt:** Mở Terminal (Command Prompt / PowerShell) tại thư mục đó và chạy lệnh:
+   ```bash
+   npm install
+   ```
+
+### Bước 2: Cài đặt API Key
+1. Tạo một file tên là `.env` tại thư mục gốc của dự án.
+2. Thêm dòng sau vào file `.env` vừa tạo:
+   ```env
+   GEMINI_API_KEY="Nhập_API_Key_Gemini_Của_Bạn_Vào_Đây"
+   ```
+   *(Tạo API Key miễn phí tại: [Google AI Studio](https://aistudio.google.com/app/apikey))*
+
+### Bước 3: Khởi động ứng dụng
+```bash
+npm run dev
+```
+👉 Mở trình duyệt web của bạn và truy cập địa chỉ: **`http://localhost:3000`**
+
+---
+
+## 2. Cách đóng gói ứng dụng thành file .exe (Dùng Electron)
+
+Ứng dụng của bạn đã được cấu hình sẵn để đóng gói thành một app desktop độc lập trên máy vi tính:
+
+1. **Cài đặt thư viện liên quan:**
    ```bash
    npm install --save-dev electron electron-builder wait-on
    ```
-2. **Chạy thử ở dạng App Desktop**:
+2. **Chạy thử app desktop:**
    ```bash
    npm run electron:dev
    ```
-3. **Đóng gói thành file .exe**:
+3. **Xuất file cài đặt `.exe`:**
    ```bash
    npm run electron:build
    ```
-   Sau khi chạy xong, bạn sẽ thấy thư mục `dist-electron` chứa file `.exe` (dạng Portable - chạy ngay không cần cài đặt).
+   👉 Sau khi chạy hoàn thành, ứng dụng dạng `.exe` (chạy trực tiếp không cần cài đặt) sẽ nằm trong thư mục `dist-electron`.
 
 ---
 
-## 3. Khắc phục lỗi thường gặp khi chạy Local
-
-### Lỗi `Failed to resolve import "pdf-lib"`
-Đây là lỗi do thư viện chưa được tải về đầy đủ. Hãy xử lý như sau:
-1. Xóa thư mục `node_modules` và file `package-lock.json`.
-2. Chạy lại lệnh:
-   ```bash
-   npm install
-   ```
-3. Nếu vẫn lỗi, hãy cài đặt thủ công các thư viện chính:
-   ```bash
-   npm install pdf-lib xlsx jszip mammoth motion react-markdown
-   ```
-
-### Lỗi URL `0.0.0.0`
-- Khi thấy thông báo `Server running on http://0.0.0.0:3000`, đừng lo lắng. Đây là cấu hình để server chấp nhận kết nối từ mọi địa chỉ.
-- Trên máy của mình, bạn hãy truy cập: **`http://localhost:3000`**.
+## 3. Khắc phục lỗi nhanh
+- **Lỗi thiếu thư viện (`Failed to resolve...`):** Hãy xóa thư mục `node_modules` và chạy lại `npm install`.
+- **Lỗi không kết nối được `0.0.0.0`:** Đây là địa chỉ mạng nội bộ, hãy truy cập chính xác địa chỉ **`http://localhost:3000`** trên trình duyệt của bạn.
