@@ -1,0 +1,175 @@
+================================================================================
+LOCALIZATION GUIDELINES & TRANSLATION RULES
+================================================================================
+Target Industry: Japan Anime Game Development (Console, Mobile & PC)
+Source Language: Japanese (JP)
+Target Language: Vietnamese (VN)
+Target Audience: Developers, Engineers, 3D Artists, Game Designers, QA, CS, etc.
+Format: Plain Text (.txt)
+Version: 1.0.0
+================================================================================
+
+1. GENERAL TRANSLATION PRINCIPLES & CORE RULES
+--------------------------------------------------------------------------------
+[Rule 1: Technical & Industry Terminology]
+- DO NOT translate standard game development, engineering, or 3D art technical 
+  terms into pure Vietnamese if the English term is the industry standard.
+- ALWAYS prioritize the English equivalent or its standard abbreviation.
+- Example: 
+  * JP: 衝突判定 (Shoutotsu Hantei) -> VN: Hitbox / Collision (NOT: Phán đoán va chạm)
+  * JP: 描画 (Byouga) -> VN: Render / Rendering (NOT: Vẽ / Miêu họa)
+
+[Rule 2: Tone and Voice]
+- Professional, technical, precise, and respectful yet modern.
+- Maintain an industry-insider tone. Avoid sounding like an academic dictionary 
+  or an outsider translating literally.
+- Use a neutral, collaborative tone appropriate for cross-border B2B and 
+  internal production communications.
+
+[Rule 3: Pronouns & Formality Constraints]
+- When writing documentation or internal communication guides:
+  * Use "Chúng tôi" / "Team" / "Dự án" for the company/team side.
+  * Use "Bạn" / "Developer" / "Artist" (or specific role) to address the reader.
+- Avoid informal or overly casual Vietnamese pronouns (cậu, tớ, mình) unless 
+  explicitly creating a casual community/CS facing guide.
+- Keep sentences concise. Japanese technical writing often strings multiple 
+  nouns together; break them down into functional technical English/Vietnamese 
+  phrases.
+
+[Rule 4: Text-Formatting & Encoding]
+- File must remain strictly UTF-8 encoded to preserve Japanese kanji and 
+  Vietnamese diacritics.
+- Place brackets around UI elements, variables, or keys where applicable: [OK], [Cancel], {user_name}.
+
+
+2. SYSTEMATIC GRAMMAR & STYLISTIC MAPPING
+--------------------------------------------------------------------------------
+- JP: ~を実装する (Jisou suru) 
+  -> VN: Implement [Feature/Function] / Triển khai [Tính năng]
+- JP: ~を修正する (Shuusei suru) 
+  -> VN: Fix [Bug/Issue] / Sửa đổi [Yếu tố]
+- JP: ~を共通化する (Kyuutuuka suru)
+  -> VN: Refactor thành component dùng chung / Commonize (Engineering context)
+- JP: 仕様 (Shiyou)
+  -> VN: Spec / Specification (NOT: Thông số kỹ thuật)
+- JP: 不具合 / バグ (Fuguai / Bagu)
+  -> VN: Bug / Issue (NOT: Lỗi hỏng)
+- JP: 実機確認 (Jikki kakunin)
+  -> VN: Test trên thiết bị thật / On-device testing
+
+
+3. COMPREHENSIVE GLOSSARY (JP | EN/VN)
+--------------------------------------------------------------------------------
+Format: [Japanese] | [Industry Standard English/VN Equivalent] | [Context/Note]
+
+--- A. ENGINEERING & GAME LOOPS ---
+フレームワーク | Framework | Giữ nguyên thuật ngữ tiếng Anh.
+クライアント側 | Client-side | Phía Client của game.
+サーバー側 | Server-side | Phía Server.
+同期処理 | Synchronous processing / Sync | Xử lý đồng bộ.
+非同期処理 | Asynchronous processing / Async | Xử lý bất đồng bộ.
+負荷軽減 | Optimization / Reduce load | Tối ưu hóa / Giảm tải hệ thống.
+メモリ漏れ / メモリリーク | Memory leak | Lỗi rò rỉ bộ nhớ.
+例外処理 | Exception handling | Xử lý ngoại lệ.
+ビルドを通す | Pass the build / Build thành công | Chạy build không lỗi.
+環境構築 | Environment setup | Thiết lập môi trường phát triển.
+マスターデータ | Master Data | Dữ liệu gốc cấu hình game (Excel/JSON/CSV).
+アセットバンドル | AssetBundle | File nén tài nguyên game (Unity context).
+
+--- B. 3D ART, ANIMATION & RENDERING ---
+モデリング | Modeling | Dựng hình 3D.
+ポリゴン数 | Polygon count / Polycount | Số lượng đa giác.
+ローポリ / ハイポリ | Low-poly / High-poly | Model ít/nhiều đa giác.
+テクスチャ | Texture | Kết cấu bề mặt 3D.
+マテリアル | Material | Chất liệu.
+リギング / 骨入れ | Rigging | Gắn xương cho model.
+モーション / アニメーション | Animation / Motion | Chuyển động của nhân vật/vật thể.
+ボーン / 骨 | Bone / Joint | Xương nhân vật.
+頂点カラー | Vertex color | Màu đỉnh.
+描画負荷 | Rendering load | Tải trọng render đồ họa.
+シェーダー | Shader | Trình đổ bóng.
+光源 / ライト | Light / Lighting | Ánh sáng trong scene.
+法線マップ | Normal map | Bản đồ vector pháp tuyến.
+
+--- C. GAME DESIGN & GAMEPLAY MECHANICS ---
+世界観 | Lore / Worldview | Bối cảnh thế giới/Cốt truyện nền của game.
+企画書 | Game Design Document (GDD) | Tài liệu thiết kế game.
+仕様書 | Spec document / Specification | Tài liệu đặc tả tính năng.
+ゲームバランス | Game balance | Cân bằng game (Chỉ số, độ khó).
+ガチャ排出率 | Gacha drop rate | Tỷ lệ rơi/xuất hiện vật phẩm Gacha.
+当たり判定 / 衝突判定 | Hitbox / Collision | Vùng va chạm nhận sát thương/tác động.
+ターン制 | Turn-based | Lối chơi theo lượt.
+リアルタイム | Real-time | Thời gian thực.
+チュートリアル | Tutorial | Hướng dẫn tân thủ.
+レベルデザイン | Level design | Thiết kế màn chơi / ải.
+報酬設計 | Reward structure / Economy design | Thiết kế hệ thống phần thưởng.
+
+--- D. QUALITY ASSURANCE (QA) & DEBUGGING ---
+デバッグ | Debug / Debugging | Tìm và sửa lỗi phần mềm.
+不具合報告 | Bug reporting / Issue logging | Báo cáo lỗi hệ thống.
+再現手順 | Steps to reproduce (STR) | Các bước tái hiện lỗi.
+再現性 | Reproducibility | Tỷ lệ/Khả năng tái hiện lỗi (Ví dụ: 100%, Ngẫu nhiên).
+端末依存 | Device-specific issue | Lỗi chỉ xuất hiện trên một số dòng máy cụ thể.
+検収 / 受入テスト | Acceptance Testing / QA Sign-off | Nghiệm thu tính năng.
+モンキーテスト | Monkey testing / Ad-hoc testing | Test ngẫu nhiên vô hướng.
+デバッグコマンド | Debug command / Cheat command | Lệnh nội bộ dành cho dev/tester.
+
+--- E. CUSTOMER SUPPORT (CS) & LIVE OPERATIONS ---
+定型文 | Template / Canned response | Biểu mẫu câu trả lời sẵn.
+お問合せ | Inquiry / Support ticket | Yêu cầu hỗ trợ từ người chơi.
+メンテナンス | Maintenance | Bảo trì hệ thống/server.
+データ復旧 | Account recovery / Data restoration | Khôi phục dữ liệu tài khoản.
+BAN / アカウント停止 | Account BAN / Account suspension | Khóa tài khoản vi phạm.
+チート行為 | Cheating / Hacking | Hành vi gian lận trong game.
+補填 | Compensation | Đền bù (gửi quà đền bù cho người chơi khi có lỗi).
+ユーザー動向 | User trends / Player behavior | Xu hướng hành vi người chơi.
+
+
+4. ANIME-SPECIFIC & STYLISTIC TERMINOLOGY
+--------------------------------------------------------------------------------
+Because this is an *Anime Game Company*, general gaming terms must be carefully 
+aligned with Otaku/Anime subculture terminology standard in both Japan and Vietnam.
+
+- JP: 立ち絵 (Tachie)
+  -> VN: Standing artwork / Tachie (NOT: Ảnh đứng)
+- JP: スチル / 一枚絵 (Suchiru / Ichimaie)
+  -> VN: CG / Key visual / Still illustration (Hình minh họa sự kiện cốt truyện)
+- JP: デフォルメ / ちびキャラ (Deforume / Chibi)
+  -> VN: Chibi / Deformed character
+- JP: ボイス / CV (Character Voice)
+  -> VN: VA (Voice Actor) / CV / Seiyuu (Giữ nguyên CV/Seiyuu nếu là văn hóa Nhật)
+- JP: 属性 (Zokusei)
+  -> VN: Element / Attribute (Hệ/Thuộc tính của nhân vật, ví dụ: Hỏa, Thủy, Phong)
+- JP: 限界突破 (Genkai Toppa)
+  -> VN: Limit Break (NOT: Vượt qua giới hạn)
+- JP: 覚醒 (Kakusei)
+  -> VN: Awaken / Awakening (Thức tỉnh nhân vật)
+- JP: 進化 (Shinka)
+  -> VN: Evolve / Evolution (Tăng bậc / Tiến hóa)
+
+
+5. CONSTRAINTS & FORBIDDEN TRANSLATIONS (BLACK LIST)
+--------------------------------------------------------------------------------
+To prevent awkward, literal Vietnamese translations, strictly avoid the following:
+
+❌ FORBIDDEN: ハンター (Hantaa) -> Thợ săn (If it's an in-game technical class name, keep "Hunter").
+❌ FORBIDDEN: スキルを打つ (Sukiru wo utsu) -> Đánh kỹ năng (Use: "Cast skill" or "Sử dụng kỹ năng").
+❌ FORBIDDEN: バグを殺す (Bagu wo korosu) -> Giết bug (Use: "Fix bug" or "Sửa lỗi").
+❌ FORBIDDEN: ユーザー (Yuuzaa) -> Người sử dụng (Use: "User" or "Người chơi" depending on internal/external context).
+❌ FORBIDDEN: キャラクター (Kyarakutaa) -> Nhân vật hoạt hình (Use: "Character" or "Char").
+
+
+6. CONTEXT-BASED VARIATION EXAMPLES
+--------------------------------------------------------------------------------
+The word [運用 - Unyou] changes completely based on target audience:
+- If context is Engineering (Server/DevOps): -> VN: Operation / Deployment (Vận hành hệ thống).
+- If context is Game Design/Live Ops: -> VN: Live Operations / Live Ops (Vận hành sự kiện, update game).
+
+The word [マスター - Masutaa]:
+- If context is Database/Dev: -> VN: Master Data (Dữ liệu cấu hình).
+- If context is Git/Version Control: -> VN: Master branch / Main branch.
+- If context is Gameplay/Lore: -> VN: Master (Chủ nhân - ví dụ game Fate/Grand Order style).
+
+================================================================================
+[END OF RULES FILE]
+================================================================================
