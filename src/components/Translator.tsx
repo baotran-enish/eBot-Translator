@@ -86,12 +86,12 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
 
     if (isFirstRun) {
       try {
-        const rulesRes = await fetch('/skill/Translation Rules and Context/japan_anime_game_company_rules.txt');
+        const rulesRes = await fetch('/api/skill/rules');
         if (rulesRes.ok) {
-          const rulesContent = await rulesRes.text();
-          if (rulesContent) {
-            await saveSetting('translation_rules', rulesContent);
-            savedRules = rulesContent;
+          const rulesData = await rulesRes.json();
+          if (rulesData.content) {
+            await saveSetting('translation_rules', rulesData.content);
+            savedRules = rulesData.content;
           }
         }
       } catch (e) {
@@ -99,11 +99,11 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
       }
 
       try {
-        const glossaryRes = await fetch('/skill/Glossary/japan_anime_game_company_glossary.txt');
+        const glossaryRes = await fetch('/api/skill/glossary');
         if (glossaryRes.ok) {
-          const glossaryContent = await glossaryRes.text();
-          if (glossaryContent) {
-            const lines = glossaryContent.split(/\r?\n/);
+          const glossaryData = await glossaryRes.json();
+          if (glossaryData.content) {
+            const lines = glossaryData.content.split(/\r?\n/);
             const parsedTerms: any[] = [];
             lines.forEach((line: string) => {
               if (!line.trim()) return;
