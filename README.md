@@ -6,23 +6,33 @@ Công cụ tích hợp sâu các cơ chế quản lý quy tắc dịch nghiêm n
 
 ---
 
+## ⭐ CÁC TÍNH NĂNG CHÍNH (FEATURES)
+
+* **Biên dịch Văn bản (Core Translator & Rules)**:
+  * Biên dịch tự động quy nạp bộ quy tắc bối cảnh đặc hữu của ngành Game Anime Nhật Bản (**Rules & Context**).
+  * Đảm bảo tính nhất quán của danh từ riêng, giọng điệu hội thoại (Tone of voice) và tinh thần Otaku đặc trưng.
+
+* **Dịch thuật Tài liệu (Document Localization)**:
+  * Hỗ trợ tải phần mềm kịch kịch bản game (Scenario documents), tài liệu GDD (Game Design Documents) đa định dạng để dịch hàng loạt đồng bộ, tiết kiệm thời gian phát triển.
+
+* **Cá nhân hóa Thuật ngữ (Glossary Manager)**:
+  * Giao diện quản lý trực quan cho phép tra cứu nhanh, thêm mới, xem hoặc xóa bớt các danh từ cố định (Tên nhân vật, kỹ năng, thuộc tính SSR, UR...) ngay trong ứng dụng, tự động áp dụng trực tiếp lên từng dòng văn bản cần dịch.
+
+* **Trợ lý Tra cứu & Dịch thuật (Smart Chatbot)**:
+  * Chatbot thông minh hỗ trợ phân tích từ vựng nâng cao, phân tách nghĩa ngữ pháp tiếng Nhật và tư vấn các phương án bản địa hóa mượt mà nhất trong phát triển trò chơi.
+
+
+---
+
 ## 🚀 HƯỚNG DẪN KHỞI CHẠY (Dành cho Người dùng Phổ thông)
 
-### Cách 1: Chạy trực tiếp bằng ứng dụng Desktop độc lập (.exe) - KHUYÊN DÙNG
+### Chạy trực tiếp bằng ứng dụng Desktop độc lập (.exe) - KHUYÊN DÙNG
 *Đây là cách đơn giản và nhanh chóng nhất. Ứng dụng đã được đóng gói sẵn và có thể chạy ngay lập tức mà không cần cài đặt thêm phần mềm bổ trợ.*
+**Yêu cầu trước khi chạy**: Đảm bảo máy tính của bạn đã cài đặt sẵn **[Node.js](https://nodejs.org/)** (Khuyên dùng bản LTS mới nhất).
 
 1. **Giải nén**: Giải nén thư mục chứa công cụ dịch thuật **eBot** sau khi tải về.
 2. **Khởi chạy**: Tìm và nhấp đúp chuột (Double click) vào tệp **`eBot-Translator.exe`** tại thư mục gốc.
 3. **Trải nghiệm**: Cửa sổ ứng dụng eBot sẽ trực tiếp hiển thị và sẵn sàng sử dụng.
-
----
-
-### Cách 2: Khởi chạy phiên bản Web bằng trình tự động (`eBot.bat`)
-*Sử dụng khi bạn muốn chạy ứng dụng thông qua trình duyệt web thông thường.*
-
-1. **Khởi chạy**: Nhấp đúp chuột vào tệp **`eBot.bat`** tại thư mục gốc của dự án.
-2. **Tự động thiết lập**: Trình khởi chạy sẽ tự động tải các tài nguyên cần thiết trong lần đầu tiên và kích hoạt máy chủ dịch thuật.
-3. **Mở trình duyệt**: Phiên bản web của ứng dụng sẽ tự động được mở tại địa chỉ: **`http://localhost:3000`** trên trình duyệt mặc định của bạn.
 
 ---
 
@@ -36,20 +46,34 @@ Bạn **không cần** chỉnh sửa hay can thiệp vào các tệp tin cấu h
 
 ---
 
-## 📚 TÍNH NĂNG NỔI BẬT & TÀI NGUYÊN TÍCH HỢP SẴN
+## ✨ CÁ NHÂN HÓA HỆ THỐNG DỊCH THUẬT
 
-* **Bản dịch Chuẩn xác cho Game Anime**: Hệ thống tự động nhận dạng cấu trúc câu thoại tiếng Nhật và chuyển đổi thành tiếng Việt mượt mà theo đúng văn hóa Otaku.
-* **Tự động áp dụng Glossary & Luật dịch**: Ở lần khởi chạy đầu tiên, eBot sẽ tự động tải trước các tài nguyên chuyên biệt:
-  * **Bảng Thuật ngữ**: Tự động load từ `skill/Glossary/japan_anime_game_company_glossary.txt`
-  * **Quy tắc Dịch & Ngữ cảnh**: Tự động quy nạp từ `skill/Translation Rules and Context/japan_anime_game_company_rules.txt`
-* **Công cụ Chatbot Hỗ trợ Lập tức**: Hộp thoại chat tra cứu ngữ nghĩa, giải thích từ vựng và tự động điều chỉnh độ cao hộp soạn thảo thông minh mỗi khi bạn gửi văn bản.
+Phiên bản **eBot 0.4.1** được thiết kế nguyên bản để hỗ trợ các nhà phát triển và biên dịch viên tự định hình phong cách ngôn ngữ cho dự án của mình thông qua cơ chế tự động quy nạp tài nguyên tại lần khởi chạy đầu tiên.
 
----
+### 📓 1. Cá nhân hóa "Glossary" (Bảng Thuật Ngữ)
+* **Mô tả**: Là danh sách các danh từ riêng, tên nhân vật, kỹ năng (Skill names), vật phẩm ứng với từng dự án. eBot sẽ tự động tải dữ liệu gốc từ tệp tin `skill/Glossary/japan_anime_game_company_glossary.txt` trong lần cài đặt đầu tiên.
+* **Lợi ích Vượt Trội**:
+  * **Độ chính xác chuẩn xác**: Ép model AI luôn tuân thủ cách quy đổi thuật ngữ mong muốn, ngăn chặn tình trạng dịch mỗi nơi một kiểu (Ví dụ: `限界突破` luôn dịch là `Limit Break`, không dịch thô thành `Vượt qua giới hạn`).
+  * **Bảo vệ danh từ riêng**: Các tên riêng của nhân vật hay địa danh trong game anime của bạn sẽ được giữ nguyên chữ viết hoa hoặc phong cách âm Hán Việt chuẩn mực, tôn trọng nguyên tác Otaku.
+  * **Tùy biến linh hoạt**: Người dùng có thể chỉnh sửa trực tiếp, thêm mới hoặc xóa bớt thuật ngữ ngay trên bảng giao diện điều khiển thân thiện của ứng dụng.
 
-## 📝 Thuật Ngữ Bản Địa Hóa Phổ Biến (Common Translation Terms)
+### 📜 2. Cá nhân hóa "Rules & Context" (Quy Tắc Dịch Thuật & Ngữ Cảnh)
+* **Mô tả**: Là văn bản hướng dẫn hành vi dịch thuật, đặt ra các giới hạn quy mô lớn đối với AI (Giọng điệu, cách xưng xả, cấm dịch gì...). Bản cài đặt ban đầu được tự động load từ tệp tin `skill/Translation Rules and Context/japan_anime_game_company_rules.txt`.
+* **Lợi ích Vượt Trội**:
+  * **Tạo "Màu Sắc" riêng cho game**: Định hình phong cách hội thoại anime đặc trưng (Hào hùng, đáng yêu, cổ trang hay hiện đại viễn tưởng).
+  * **Giải quyết mâu thuẫn xưng hô**: Giải quyết triệt để lỗi cơ bản của AI khi dịch hội thoại tiếng Nhật (vốn không có chủ ngữ rõ ràng) sang tiếng Việt (đòi hỏi phân cấp vai vế anh/em, cậu/tớ, ta/ngươi...).
+  * **Hàn gắn rào cản kỹ thuật**: Quy định các thuật ngữ kỹ thuật (như *Hitbox*, *On-device testing*, *Render*) được giữ nguyên bản tiếng Anh công nghiệp hoặc chuyển hóa khéo léo thay vì dịch tối nghĩa theo dạng tự điển thông thường.
 
-* **Local Setup Guide / Hướng dẫn cài đặt nội bộ**: Cách triển khai ứng dụng độc lập trên máy tính cá nhân.
-* **Translation Rules & Context / Quy tắc dịch thuật & Ngữ cảnh**: Thiết lập giọng điệu (Tone of voice), phong cách nhân vật (Character archetype), và ngữ cảnh bối cảnh game (Lore context).
-* **Glossary / Bảng thuật ngữ**: Cố định cấu trúc dịch của danh từ riêng, tên chiêu thức (Skill names) hay tên thuật ngữ kỹ thuật trong game.
-* **Batch Translation / Dịch hàng loạt**: Xử lý dịch tệp tin tài liệu quy mô lớn một cách đồng bộ.
-* **Standalone Desktop Application / Ứng dụng Desktop độc lập**: Phần mềm cài đặt chạy trực tiếp dưới dạng file `.exe` không cần trình duyệt.
+### 👥 3. Tối ưu hóa theo Từng Vị Trí Công Việc (Role-based Personalization)
+eBot cho phép định hình lại Glossary & Rules phục vụ đắc lực cho từng bộ phận trong quy trình phát triển sản phẩm:
+* **Biên dịch viên (Translators / Localizers)**: Tự thiết lập cấu trúc đại từ nhân xưng, kiểm soát hệ từ vựng và văn phong nói của từng nhân vật (Character archetypes) để giữ nguyên cái hồn cốt truyện của phiên bản gốc Nhật Bản.
+* **Kỹ sư / Lập trình viên (Developers / Programmers)**: Tùy biến Quy tắc dịch để cưỡng chế AI **giữ nguyên vẹn mã nguồn, thẻ định dạng JSON, XML hay tham số biến** (Vd: `{player_name}`, `<br/>`, `\n`) không bị biên dịch nhầm phá hủy tính ổn định của trò chơi khi import.
+* **Kiểm thử viên (QA / LQA Testers)**: Cá nhân hóa hướng dẫn kiểm toán thuật ngữ, đảm bảo lọc nhanh các mã lỗi hệ thống, mã giao diện phần cứng cần giữ dạng mã gốc chuẩn và duy trì tính thống nhất (consistency) tuyệt đối của các nhãn nút bấm (UI Buttons).
+* **Game Designer / Creator / Marketing**: Thiết kế kịch bản game (Scenario Lore) chuẩn hóa và đồng nhất phong cách thương hiệu (IP Brand Voice), giúp các ấn phẩm PR đại chúng luôn đồng điệu với nội dung sâu thẳm trong trò chơi.
+
+### 🛠️ 4. Tùy chỉnh Linh Hoạt Theo Thể Loại Trò Chơi (Context-aware Customization)
+Bạn hoàn toàn có thể hiệu chỉnh tài liệu nguồn trong mục `skill/` theo các phong thủy dự án khác nhau:
+* **Thể loại Anime / Otaku (Visual Novel, Card-battle)**: Quy định xưng hô thân mật tự nhiên (đuôi xưng gọi *-sama, -chan, -kun, senpai* giữ nguyên hoặc Việt hóa mượt mà), duy trì hệ thống xếp cấp SSR, UR, Waifu.
+* **Thể loại Kiếm hiệp / Cổ trang Nhật Bản (Sengoku, Samurai)**: Định hình quy tắc dịch chuyển âm Hán Việt trang trọng, xưng hô tôn ti trật tự thời kỳ lịch sử.
+* **Thể loại Khoa học viễn tưởng / Cơ khí (Cyberpunk, Mecha)**: Nạp các quy tắc dịch giữ nguyên các thuật ngữ tiếng Anh gốc của trang thiết bị công nghệ cao hoặc định danh thông số quân sự.
+

@@ -27,7 +27,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { translateText, detectLanguage, GlossaryItem } from '../services/gemini';
 import { saveToHistory, getHistory, deleteFromHistory, clearHistory, getSetting, saveSetting, getGlossary, updateGlossary } from '../services/db';
 import { cn } from '../lib/utils';
-import ReactMarkdown from 'react-markdown';
+import CustomMarkdown from './CustomMarkdown';
 import DocumentTranslator from './DocumentTranslator';
 import DictionaryChat from './DictionaryChat';
 import GlossaryManager from './GlossaryManager';
@@ -601,7 +601,7 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
                   </div>
                 ) : translatedText ? (
                   <div className="markdown-body prose prose-slate dark:prose-invert max-w-none dark:text-slate-100">
-                    <ReactMarkdown>{translatedText}</ReactMarkdown>
+                    <CustomMarkdown>{translatedText}</CustomMarkdown>
                   </div>
                 ) : (
                   <span className="text-slate-400 dark:text-slate-400 italic text-sm">Translation will appear here</span>
@@ -700,7 +700,7 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
                         <p className={cn("text-sm text-slate-600 dark:text-slate-300", expandedHistoryId !== item.id && "line-clamp-2")}>{item.sourceText}</p>
                         {expandedHistoryId === item.id && (
                           <div className="text-sm font-medium text-blue-600 dark:text-blue-400 pt-2 border-t border-slate-100 dark:border-slate-700">
-                             <ReactMarkdown>{item.translatedText}</ReactMarkdown>
+                             <CustomMarkdown>{item.translatedText}</CustomMarkdown>
                           </div>
                         )}
                       </div>

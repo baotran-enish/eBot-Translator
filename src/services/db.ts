@@ -31,13 +31,26 @@ interface TranslatorDB extends DBSchema {
       value: any;
     };
   };
+  chat_sessions: {
+    key: string;
+    value: {
+      id: string;
+      title: string;
+      messages: Array<{
+        role: 'user' | 'model';
+        text: string;
+      }>;
+      timestamp: number;
+    };
+    indexes: { 'by-timestamp': number };
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<TranslatorDB>> | null = null;
 
 function getDB() {
   if (!dbPromise) {
-    dbPromise = openDB<TranslatorDB>('translator-db', 2, {
+    dbPromise = openDB<TranslatorDB>('translator-db', 3, {
       upgrade(db, oldVersion) {
         if (oldVersion < 1) {
           const historyStore = db.createObjectStore('history', {
@@ -53,6 +66,12 @@ function getDB() {
           db.createObjectStore('settings', {
             keyPath: 'id',
           });
+        }
+        if (oldVersion < 3) {
+          const chatSessionStore = db.createObjectStore('chat_sessions', {
+            keyPath: 'id',
+          });
+          chatSessionStore.createIndex('by-timestamp', 'timestamp');
         }
       },
     });
@@ -127,3 +146,30 @@ export async function getSetting(id: string) {
   const item = await db.get('settings', id);
   return item?.value;
 }
+
+// Chat Sessions
+export async function saveChatSession(session: {
+  id: string;
+  title: string;
+  messages: Array<{ role: 'user' | 'model'; text: string }>;
+  timestamp: number;
+}) {
+  const db = await getDB();
+  await db.put('chat_sessions', session);
+}
+
+export async function getChatSessions() {
+  const db = await getDB();
+  return db.getAllFromIndex('chat_sessions', 'by-timestamp');
+}
+
+export async function getChatSession(id: string) {
+  const db = await getDB();
+  return db.get('chat_sessions', id);
+}
+
+export async function deleteChatSession(id: string) {
+  const db = await getDB();
+  await db.delete('chat_sessions', id);
+}
+

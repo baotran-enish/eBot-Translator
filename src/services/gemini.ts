@@ -213,7 +213,7 @@ export async function translateDocument(fileBase64: string, mimeType: string, so
   }
 }
 
-export function createDictionaryChat(rules?: string, glossary?: GlossaryItem[]) {
+export function createDictionaryChat(rules?: string, glossary?: GlossaryItem[], history?: Array<{ role: 'user' | 'model'; text: string }>) {
   const glossaryString = glossary?.length 
     ? `\n\nUse the following specialized terms (Glossary):\n${glossary.map(g => `- ${g.term}: ${g.translation}${g.note ? ` (${g.note})` : ''}`).join('\n')}`
     : '';
@@ -221,8 +221,14 @@ export function createDictionaryChat(rules?: string, glossary?: GlossaryItem[]) 
   const ruleContext = rules && rules.trim() ? `\n\nAdditional rules and context:\n${rules}` : '';
   
   const ai = getGeminiClient();
+  const sdkHistory = history?.map(h => ({
+    role: h.role === 'model' ? 'model' : 'user',
+    parts: [{ text: h.text }]
+  }));
+
   return ai.chats.create({
     model: "gemini-3.5-flash",
+    history: sdkHistory,
     config: {
       systemInstruction: `You are a professional dictionary and language assistant specializing in Japanese and Vietnamese.
 Your primary role is to assist with sentence writing, translation, and general language Q&A.

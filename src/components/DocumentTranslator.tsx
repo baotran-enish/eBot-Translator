@@ -17,7 +17,7 @@ import { translateDocument } from '../services/gemini';
 import { processDocxOriginal, processXlsxOriginal, processPptxOriginal, processOdtOriginal } from '../services/documentService';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { cn } from '../lib/utils';
-import ReactMarkdown from 'react-markdown';
+import CustomMarkdown from './CustomMarkdown';
 
 // Helper to convert file to base64
 const fileToBase64 = (file: File): Promise<string> => {
@@ -306,7 +306,7 @@ export default function DocumentTranslator({ sourceLang, targetLang, rules, glos
                     <X size={16} />
                   </button>
                   <div className="markdown-body prose prose-blue prose-slate dark:prose-invert max-w-none dark:text-slate-100">
-                    <ReactMarkdown>{translatedContent}</ReactMarkdown>
+                    <CustomMarkdown>{translatedContent}</CustomMarkdown>
                   </div>
                 </div>
               )}
