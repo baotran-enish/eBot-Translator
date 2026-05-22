@@ -12,6 +12,34 @@ async function startServer() {
 
   app.use(express.json({ limit: '50mb' }));
 
+  app.get("/api/skill/glossary", (req, res) => {
+    try {
+      const filePath = path.join(process.cwd(), "skill", "Glossary", "japan_anime_game_company_glossary.txt");
+      if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, "utf-8");
+        res.json({ content });
+      } else {
+        res.status(404).json({ error: "Predefined glossary file not found" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/skill/rules", (req, res) => {
+    try {
+      const filePath = path.join(process.cwd(), "skill", "Translation Rules and Context", "japan_anime_game_company_rules.txt");
+      if (fs.existsSync(filePath)) {
+        const content = fs.readFileSync(filePath, "utf-8");
+        res.json({ content });
+      } else {
+        res.status(404).json({ error: "Predefined rules file not found" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

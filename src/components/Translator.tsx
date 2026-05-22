@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { translateText, detectLanguage, GlossaryItem } from '../services/gemini';
-import { saveToHistory, getHistory, deleteFromHistory, clearHistory, getSetting, saveSetting } from '../services/db';
+import { saveToHistory, getHistory, deleteFromHistory, clearHistory, getSetting, saveSetting, getGlossary, updateGlossary } from '../services/db';
 import { cn } from '../lib/utils';
 import ReactMarkdown from 'react-markdown';
 import DocumentTranslator from './DocumentTranslator';
@@ -79,8 +79,62 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
   }, []);
 
   const loadSettings = async () => {
-    const savedRules = await getSetting('translation_rules');
-    if (savedRules) setRules(savedRules);
+    let savedRules = await getSetting('translation_rules');
+    let savedGlossary = await getGlossary();
+
+    const isFirstRun = localStorage.getItem('ebot_initialized') !== 'true';
+
+    if (isFirstRun) {
+      try {
+        const rulesRes = await fetch('/api/skill/rules');
+        if (rulesRes.ok) {
+          const rulesData = await rulesRes.json();
+          if (rulesData.content) {
+            await saveSetting('translation_rules', rulesData.content);
+            savedRules = rulesData.content;
+          }
+        }
+      } catch (e) {
+        console.error('Failed to fetch predefined rules:', e);
+      }
+
+      try {
+        const glossaryRes = await fetch('/api/skill/glossary');
+        if (glossaryRes.ok) {
+          const glossaryData = await glossaryRes.json();
+          if (glossaryData.content) {
+            const lines = glossaryData.content.split(/\r?\n/);
+            const parsedTerms: any[] = [];
+            lines.forEach((line: string) => {
+              if (!line.trim()) return;
+              const parts = line.split('|').map(p => p.trim());
+              if (parts.length >= 2 && parts[0] && parts[1]) {
+                parsedTerms.push({
+                  term: parts[0],
+                  translation: parts[1],
+                  note: parts[2] || ''
+                });
+              }
+            });
+            if (parsedTerms.length > 0) {
+              await updateGlossary(parsedTerms);
+              savedGlossary = await getGlossary();
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Failed to fetch predefined glossary:', e);
+      }
+
+      localStorage.setItem('ebot_initialized', 'true');
+    }
+
+    if (savedRules) {
+      setRules(savedRules);
+    }
+    if (savedGlossary && savedGlossary.length > 0) {
+      setGlossary(savedGlossary.map(d => ({ term: d.term, translation: d.translation, note: d.note })));
+    }
   };
 
   useEffect(() => {
@@ -268,7 +322,7 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-6">
+    <div className="max-w-4xl mx-auto p-4 space-y-6 mt-[-35px]">
       {/* Header Area */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -475,7 +529,7 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-start">
           {/* Source Language Side */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between px-1">
+            <div className="flex items-center justify-between px-1 h-8">
               <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">
                 {sourceLang === 'ja' ? 'Japanese' : 'Vietnamese'}
               </span>
@@ -513,21 +567,28 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
           </div>
 
           {/* Swap Button */}
-          <div className="flex md:h-full items-center justify-center pt-8 md:pt-20">
+          <div className="flex h-8 md:h-8 items-center justify-center my-2 md:my-0 z-20">
             <button 
               onClick={swapLanguages}
-              className="p-3 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white text-slate-600 dark:text-slate-300 shadow-md transition-all active:scale-90"
+              className="p-1.5 md:p-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white text-slate-600 dark:text-slate-300 shadow-sm transition-all active:scale-90"
             >
-              <ArrowLeftRight size={20} className="md:rotate-0 rotate-90" />
+              <ArrowLeftRight size={18} className="md:rotate-0 rotate-90" />
             </button>
           </div>
 
           {/* Target Language Side */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between px-1">
+            <div className="flex items-center justify-between px-1 h-8">
               <span className="text-sm font-medium text-slate-500 uppercase tracking-wider">
                 {targetLang === 'ja' ? 'Japanese' : 'Vietnamese'}
               </span>
+              <button
+                onClick={handleClear}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                title="Clear Input and Output"
+              >
+                <Trash2 size={20} />
+              </button>
             </div>
             <div className="relative">
               <div className={cn(
@@ -568,13 +629,6 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
 
         {/* Action Buttons */}
         <div className="flex justify-center items-center gap-3 mt-6">
-          <button
-            onClick={handleClear}
-            className="p-3 rounded-2xl transition-all shadow-md bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
-            title="Clear Input and Output"
-          >
-            <Trash2 size={20} />
-          </button>
           <button
             onClick={handleTranslate}
             disabled={!sourceText.trim() || isLoading}

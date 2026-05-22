@@ -1,6 +1,6 @@
 {
-  "name": "Koe JP-VN Translator",
-  "short_name": "Koe",
+  "name": "eBot Translator",
+  "short_name": "eBot",
   "description": "High-performance Japanese-Vietnamese translator.",
   "start_url": "/",
   "display": "standalone",

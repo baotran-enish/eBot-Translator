@@ -22,6 +22,7 @@ export default function DictionaryChat({ rules, glossary }: DictionaryChatProps)
   const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<any>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     chatRef.current = createDictionaryChat(rules, glossary);
@@ -38,9 +39,10 @@ export default function DictionaryChat({ rules, glossary }: DictionaryChatProps)
 
     const userMessage = input.trim();
     setInput('');
-    // Reset height of textarea
-    const textarea = document.querySelector('textarea');
-    if (textarea) textarea.style.height = 'auto';
+    // Reset height of textarea using the proper ref
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
     setMessages(prev => [...prev, { role: 'user', text: userMessage }]);
     setIsLoading(true);
 
@@ -68,8 +70,10 @@ export default function DictionaryChat({ rules, glossary }: DictionaryChatProps)
 
   return (
     <div className={cn(
-      "flex flex-col bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm overflow-hidden transition-all duration-500 ease-in-out",
-      messages.length === 0 ? "h-auto" : "h-[600px]"
+      "flex flex-col bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-sm overflow-hidden transition-all duration-300 ease-in-out",
+      messages.length === 0
+        ? "h-[400px] md:h-[calc(100vh-340px)] min-h-[300px] max-h-[550px]"
+        : "h-[650px] md:h-[calc(100vh-180px)] min-h-[500px] max-h-[850px]"
     )}>
       {/* Chat Header */}
       <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-900/50">
@@ -96,10 +100,7 @@ export default function DictionaryChat({ rules, glossary }: DictionaryChatProps)
       {/* Chat Messages */}
       <div 
         ref={scrollRef}
-        className={cn(
-          "overflow-y-auto p-6 space-y-6 scroll-smooth transition-all duration-500",
-          messages.length === 0 ? "min-h-[200px]" : "flex-1"
-        )}
+        className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth transition-all duration-500"
       >
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-slate-400 py-4">
@@ -161,6 +162,7 @@ export default function DictionaryChat({ rules, glossary }: DictionaryChatProps)
       <div className="p-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
         <div className="flex items-end gap-2 p-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 transition-all">
           <textarea 
+            ref={textareaRef}
             rows={1}
             value={input}
             onChange={(e) => setInput(e.target.value)}

@@ -15,7 +15,9 @@ export default function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(() => {
+    return !localStorage.getItem('gemini_api_key');
+  });
 
   useEffect(() => {
     if (isDark) {
@@ -29,7 +31,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 transition-colors duration-300">
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
-      <main className="py-8 md:py-16 relative z-10">
+      <main className="py-4 md:py-8 relative z-10">
         <Translator isDark={isDark} setIsDark={setIsDark} onOpenSettings={() => setIsSettingsOpen(true)} />
       </main>
       

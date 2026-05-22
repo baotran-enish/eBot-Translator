@@ -1,4 +1,4 @@
-const CACHE_NAME = 'koe-translator-v1';
+const CACHE_NAME = 'eBot Translator (JP-VN) 0.4.1';
 const ASSETS = [
   '/',
   '/index.html',
