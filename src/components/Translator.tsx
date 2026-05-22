@@ -86,12 +86,12 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
 
     if (isFirstRun) {
       try {
-        const rulesRes = await fetch('/api/skill/rules');
+        const rulesRes = await fetch('/skill/Translation Rules and Context/japan_anime_game_company_rules.txt');
         if (rulesRes.ok) {
-          const rulesData = await rulesRes.json();
-          if (rulesData.content) {
-            await saveSetting('translation_rules', rulesData.content);
-            savedRules = rulesData.content;
+          const rulesContent = await rulesRes.text();
+          if (rulesContent) {
+            await saveSetting('translation_rules', rulesContent);
+            savedRules = rulesContent;
           }
         }
       } catch (e) {
@@ -99,11 +99,11 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
       }
 
       try {
-        const glossaryRes = await fetch('/api/skill/glossary');
+        const glossaryRes = await fetch('/skill/Glossary/japan_anime_game_company_glossary.txt');
         if (glossaryRes.ok) {
-          const glossaryData = await glossaryRes.json();
-          if (glossaryData.content) {
-            const lines = glossaryData.content.split(/\r?\n/);
+          const glossaryContent = await glossaryRes.text();
+          if (glossaryContent) {
+            const lines = glossaryContent.split(/\r?\n/);
             const parsedTerms: any[] = [];
             lines.forEach((line: string) => {
               if (!line.trim()) return;
@@ -330,7 +330,12 @@ export default function Translator({ isDark, setIsDark, onOpenSettings }: Transl
             <div className="p-2 bg-blue-600 rounded-lg text-white">
               <Languages size={24} />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">eBot Trainslator</h1>
+            <div className="flex flex-col">
+              <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100 leading-tight">eBot Trainslator</h1>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                Model AI đang dùng: <span className="font-semibold text-blue-600 dark:text-blue-400">Gemini 3.5 Flash</span> (Active AI Model)
+              </span>
+            </div>
           </div>
           <button
             onClick={() => setIsDark(!isDark)}

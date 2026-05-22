@@ -1,0 +1,125 @@
+勇者 | Hero | Anh hùng
+召喚 | Summon | Triệu hồi
+攻撃 | Attack | Tấn công
+防御 | Defense | Phòng thủ
+回復 | Heal | Hồi máu
+魔法 | Magic | Ma thuật
+必殺技 | Special Move | Tuyệt kỹ
+奥義 | Ultimate Skill | Chiêu cuối
+属性 | Element | Thuộc tính
+火属性 | Fire Element | Hệ lửa
+水属性 | Water Element | Hệ nước
+風属性 | Wind Element | Hệ gió
+光属性 | Light Element | Hệ sáng
+闇属性 | Dark Element | Hệ tối
+敵 | Enemy | Kẻ địch
+味方 | Ally | Đồng minh
+ボス | Boss | Trùm
+中ボス | Mid Boss | Boss phụ
+ステージ | Stage | Màn chơi
+クエスト | Quest | Nhiệm vụ
+ミッション | Mission | Nhiệm vụ
+報酬 | Reward | Phần thưởng
+経験値 | Experience Points | Kinh nghiệm
+レベル | Level | Cấp độ
+スキル | Skill | Kỹ năng
+パッシブ | Passive | Nội tại
+アクティブ | Active Skill | Kỹ năng chủ động
+バフ | Buff | Tăng sức mạnh
+デバフ | Debuff | Giảm sức mạnh
+クリティカル | Critical Hit | Chí mạng
+コンボ | Combo | Liên kích
+チェイン | Chain | Chuỗi kỹ năng
+ダメージ | Damage | Sát thương
+耐久値 | Durability | Độ bền
+HP | Health Points | Máu
+MP | Mana Points | Năng lượng
+スタミナ | Stamina | Thể lực
+ゲージ | Gauge | Thanh năng lượng
+ターン | Turn | Lượt chơi
+クールタイム | Cooldown | Hồi chiêu
+ガチャ | Gacha | Quay thưởng
+排出率 | Drop Rate | Tỉ lệ rơi
+レアリティ | Rarity | Độ hiếm
+SSR | Super Super Rare | Siêu hiếm
+UR | Ultra Rare | Cực hiếm
+限界突破 | Limit Break | Phá giới hạn
+進化 | Evolution | Tiến hóa
+覚醒 | Awakening | Thức tỉnh
+育成 | Character Growth | Nuôi nhân vật
+装備 | Equipment | Trang bị
+武器 | Weapon | Vũ khí
+防具 | Armor | Giáp
+アクセサリー | Accessory | Phụ kiện
+素材 | Material | Nguyên liệu
+強化 | Enhancement | Cường hóa
+合成 | Synthesis | Hợp thành
+分解 | Dismantle | Phân giải
+ショップ | Shop | Cửa hàng
+課金 | In-App Purchase | Nạp tiền
+無課金 | Free-to-Play | Không nạp
+ログインボーナス | Login Bonus | Thưởng đăng nhập
+イベント | Event | Sự kiện
+ランキング | Ranking | Xếp hạng
+対戦 | Battle Match | Đối chiến
+協力プレイ | Co-op Play | Chơi phối hợp
+マルチプレイ | Multiplayer | Chơi nhiều người
+フレンド | Friend | Bạn bè
+ギルド | Guild | Bang hội
+チャット | Chat | Trò chuyện
+サーバー | Server | Máy chủ
+メンテナンス | Maintenance | Bảo trì
+不具合 | Bug | Lỗi
+修正 | Fix | Sửa lỗi
+デバッグ | Debug | Gỡ lỗi
+QA | Quality Assurance | Kiểm thử
+仕様 | Specification | Đặc tả
+実装 | Implementation | Triển khai
+開発 | Development | Phát triển
+運営 | Operation | Vận hành
+監修 | Supervision | Giám sát
+納品 | Delivery | Bàn giao
+差し戻し | Rejection | Trả về chỉnh sửa
+進捗 | Progress | Tiến độ
+工数 | Workload | Khối lượng công việc
+締切 | Deadline | Hạn chót
+確認 | Confirmation | Xác nhận
+対応 | Support Action | Xử lý
+演出 | Visual Effect Direction | Hiệu ứng trình diễn
+エフェクト | Effect | Hiệu ứng
+アニメーション | Animation | Hoạt ảnh
+モーション | Motion | Chuyển động
+カットシーン | Cutscene | Cảnh cắt
+立ち絵 | Character Portrait | Ảnh đứng nhân vật
+背景 | Background | Phông nền
+UI | User Interface | Giao diện
+UX | User Experience | Trải nghiệm người dùng
+アイコン | Icon | Biểu tượng
+バナー | Banner | Banner
+スプライト | Sprite | Sprite
+モデル | 3D Model | Mô hình 3D
+テクスチャ | Texture | Chất liệu
+リギング | Rigging | Gắn xương
+シェーダー | Shader | Shader
+レンダリング | Rendering | Kết xuất
+コンセプトアート | Concept Art | Mỹ thuật ý tưởng
+キャラクターデザイン | Character Design | Thiết kế nhân vật
+シナリオ | Scenario | Kịch bản
+世界観 | World Setting | Thế giới quan
+ボイス | Voice | Lồng tiếng
+BGM | Background Music | Nhạc nền
+SE | Sound Effect | Hiệu ứng âm thanh
+収録 | Recording | Thu âm
+翻訳 | Translation | Dịch thuật
+ローカライズ | Localization | Bản địa hóa
+CS | Customer Support | Chăm sóc khách hàng
+お問い合わせ | Inquiry | Yêu cầu hỗ trợ
+再現手順 | Reproduction Steps | Bước tái hiện lỗi
+クラッシュ | Crash | Văng game
+ロード時間 | Loading Time | Thời gian tải
+通信エラー | Connection Error | Lỗi kết nối
+アップデート | Update | Cập nhật
+パッチ | Patch | Bản vá
+リリース | Release | Phát hành
+β版 | Beta Version | Bản beta
+正式版 | Official Release | Bản chính thức
